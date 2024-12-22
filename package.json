@@ -7,6 +7,6 @@
     "typescript": "^5.7.2"
   },
   "scripts": {
-    "start": "ts-node src/day1/solution.ts"
+    "day": "node run.js"
   }
 }
