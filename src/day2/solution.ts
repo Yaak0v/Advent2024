@@ -1,8 +1,15 @@
 import fs from 'fs';
 
-const input = fs.readFileSync('src/day2/input.txt', 'utf-8');
+const input = fs.readFileSync('src/day2/inputtextshort.txt', 'utf-8');
 const reports: string[] = input.split('\n');
 const levels = reports.map((value) => value.split(' ').map(Number));
+const multiLevels = levels.map((value, index, array) => {
+  return value.map((value, index, array) => {
+    return array.toSpliced(index, 1);
+  });
+});
+
+console.log(multiLevels);
 
 const safeLevels = levels.reduce((accumulator, currentValue, index) => {
   // Determine start direction
@@ -42,8 +49,7 @@ const safeLevels = levels.reduce((accumulator, currentValue, index) => {
   }, currentValue[0]);
 
   if (safe == true) accumulator++;
-  console.log(`Level ${index}: ${currentValue} ${safe}`);
   return accumulator;
 }, 0);
 
-console.log(safeLevels);
+console.log(`There are ${safeLevels} safe reports`);
