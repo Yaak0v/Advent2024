@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 const input = fs.readFileSync('src/day3/input.txt', 'utf-8');
+console.log(input);
 
 const cleanMultipleStrings = input.match(/mul\((\d{1,3}),(\d{1,3})\)/g);
 
@@ -20,9 +21,10 @@ console.log(totalValue);
 // part 2
 // split by don't()
 const splitString = input.split(`don't()`);
+console.log(splitString);
 // get all the do() values
 const doOnlyMuls = splitString
-  .map((value) => value.match(/(?<=do\(\).*?)mul\(\d{1,3},\d{1,3}\)/g))
+  .map((value) => value.match(/(?<=do\(\).*)mul\(\d{1,3},\d{1,3}\)/gs))
   .filter((match) => match !== null)
   .flat();
 const doOnlyTotal = doOnlyMuls
@@ -34,9 +36,9 @@ const doOnlyTotal = doOnlyMuls
   })
   ?.reduce((accumulator, value) => accumulator + value, 0);
 //get the values from the first array
+const firstArrayMuls = splitString[0].match(/mul\((\d{1,3}),(\d{1,3})\)/g);
 const firstArrayTotal =
-  splitString[0]
-    .match(/mul\((\d{1,3}),(\d{1,3})\)/g)
+  firstArrayMuls
     ?.map((value) => {
       let numberPair = createNumberPair(value);
       if (numberPair && numberPair.length == 2) {
