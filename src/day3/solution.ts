@@ -1,7 +1,7 @@
 import fs from 'fs';
 
 const input = fs.readFileSync('src/day3/input.txt', 'utf-8');
-console.log(input);
+// console.log(input);
 
 const cleanMultipleStrings = input.match(/mul\((\d{1,3}),(\d{1,3})\)/g);
 
@@ -21,7 +21,7 @@ console.log(totalValue);
 // part 2
 // split by don't()
 const splitString = input.split(`don't()`);
-console.log(splitString);
+// console.log(splitString);
 // get all the do() values
 const doOnlyMuls = splitString
   .map((value) => value.match(/(?<=do\(\).*)mul\(\d{1,3},\d{1,3}\)/gs))
