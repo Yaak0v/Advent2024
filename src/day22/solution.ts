@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { setPriority } from 'os';
 
 const inputString = fs.readFileSync('src/day22/input.txt', 'utf-8');
 const inputNum = Number(inputString);
@@ -7,7 +6,8 @@ const inputNum = Number(inputString);
 const mix = (secretNumber: number, stepNumber: number) =>
   secretNumber ^ stepNumber;
 
-const prune = (secretNumber: number) => secretNumber % 16777216;
+const prune = (secretNumber: number) =>
+  ((secretNumber % 16777216) + 16777216) % 16777216;
 
 const nextNumber = (secretNumber: number) => {
   // Step 1
@@ -28,6 +28,18 @@ const nextNumber = (secretNumber: number) => {
   return secretNumber;
 };
 
-const output = nextNumber(inputNum);
+const secretNumberIterator = (secretNumber: number, iterations: number) => {
+  for (let i = 0; i < iterations; i++) {
+    secretNumber = nextNumber(secretNumber);
+    // console.log(secretNumber);
+  }
+  return secretNumber;
+};
+
+let input = 100;
+
+// input = secretNumberIterator(input, 2001);
+
+const output = nextNumber(704524);
 
 console.log(output);
